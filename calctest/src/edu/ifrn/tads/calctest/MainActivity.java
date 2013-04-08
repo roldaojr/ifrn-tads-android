@@ -14,8 +14,8 @@ public class MainActivity extends Activity {
 	private Double calcNum1 = null;
 	private Double calcNum2 = null;
 	private String mostrador;
-	private byte operacao = 0;
-	private boolean limpar = true;
+	private int operacao = 0;
+	private boolean limpar = false;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,67 +31,83 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    private void atualizarMostrador() {
+    private void atualizarMostrador(String texto) {
+    	if(limpar) {
+    		mostrador = texto;
+    	} else {
+    		mostrador += texto;
+    	}
+    	limpar = false;
     	EditText editText1 = (EditText) findViewById(R.id.editText1);
     	editText1.setText(mostrador);
     }
     
-    private void resultado() {
-    	switch(operacao) {
-    		case 1:
-    			calcNum1 += calcNum2;
-    		case 2:
-    			calcNum1 -= calcNum2;
-    		case 3:
-    			calcNum1 *= calcNum2;
-    		case 4:
-    			if(calcNum2 != 0) {
-    				calcNum1 /= calcNum2;
-    			} else {
-    				calcNum1 = 0.0;
-    			}
+    private void operacao(int tipo, Double num) {
+    	if(calcNum1 != null) {
+        	switch(operacao) {
+	    		case 1:
+	    			calcNum1 += num;
+	    			break;
+	    		case 2:
+	    			calcNum1 -= num;
+	    			break;
+	    		case 3:
+	    			calcNum1 *= num;
+	    			break;
+	    		case 4:
+	    			if(calcNum2 != 0) {
+	    				calcNum1 /= num;
+	    			} else {
+	    				calcNum1 = 0.0;
+	    			}
+	    			break;
+        	}
+        	limpar = true;
+        	String s = calcNum1.toString();
+        	if(s.endsWith(".0")) {
+        		s = s.substring(0, s.length()-2);
+        	}
+        	atualizarMostrador(s);
+    	} else {
+			calcNum1 = num;
+			operacao = tipo;
     	}
-    	operacao = 0;
-    	calcNum2 = calcNum1;
     }
     
     public void buttonCalc_click(View view) {
-    	final int[] buttonNum = new int[]
-    			{R.id.button1, R.id.button2, R.id.button3,
-    	        R.id.button4, R.id.button5, R.id.button6,
-    	        R.id.button7, R.id.button8, R.id.button9,
-    	        R.id.button0};
-    	if(Arrays.asList(buttonNum).contains(view.getId())) {
-    		Button btn = (Button) findViewById(view.getId());
-    		//calcNum2.toString()+
-    		mostrador += btn.getText().toString()+".";
-    	}
+    	Button btn = (Button) findViewById(view.getId());
     	switch(view.getId()) {
+    		case R.id.button1:
+    		case R.id.button2:
+    		case R.id.button3:
+    		case R.id.button4:
+    		case R.id.button5:
+    		case R.id.button6:
+    		case R.id.button7:
+    		case R.id.button8:
+    		case R.id.button9:
+    		case R.id.button0:
+    			atualizarMostrador((String) btn.getTag());
+        		break;
+    		case R.id.buttonPonto:
+    			//atualizarMostrador("1");
+    			break;
     		case R.id.buttonSoma:
-    			if(operacao != 0 && calcNum1 != null) resultado();
-    			operacao = 1;
+    			operacao(1, Double.valueOf(mostrador));
+    			limpar = true;
     			break;
     		case R.id.buttonSubtracao:
-    			if(operacao != 0 && calcNum1 != null) resultado();
-    			operacao = 2;
+    			operacao(2, Double.valueOf(mostrador));
     			break;
     		case R.id.buttonMultiplicacao:
-    			if(operacao != 0 && calcNum1 != null) resultado();
-    			operacao = 3;
+    			operacao(3, Double.valueOf(mostrador));
     			break;
     		case R.id.buttonDivisao:
-    			if(operacao != 0 && calcNum1 != null) resultado();
-    			operacao = 4;
+    			operacao(4, Double.valueOf(mostrador));
     			break;
     		case R.id.buttonIgual:
-    			if(operacao != 0 && calcNum1 != null) resultado();
-    			operacao = 0;
-    			calcNum1 = null;
-    			break;
-    		case R.id.buttonPonto:
-    			calcNum2 = Double.parseDouble(calcNum2.toString()+".0");
+    			operacao(0, null);
     			break;
     	}
-    	atualizarMostrador();
     }
 }

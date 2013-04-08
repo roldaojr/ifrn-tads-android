@@ -40,6 +40,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="1"
             android:text="1"
             android:textSize="24sp" />
 
@@ -49,6 +50,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="2"
             android:text="2"
             android:textSize="24sp" />
 
@@ -58,6 +60,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="3"
             android:text="3"
             android:textSize="24sp" />
 
@@ -84,6 +87,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="4"
             android:text="4"
             android:textSize="24sp" />
 
@@ -93,6 +97,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="5"
             android:text="5"
             android:textSize="24sp" />
 
@@ -102,6 +107,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="6"
             android:text="6"
             android:textSize="24sp" />
 
@@ -128,6 +134,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="7"
             android:text="7"
             android:textSize="24sp" />
 
@@ -137,6 +144,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="8"
             android:text="8"
             android:textSize="24sp" />
 
@@ -146,6 +154,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="9"
             android:text="9"
             android:textSize="24sp" />
 
@@ -181,6 +190,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="0"
             android:text="0"
             android:textSize="24sp" />
 
