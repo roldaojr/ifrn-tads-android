@@ -1,6 +1,8 @@
 package edu.ifrn.tads.calctest;
 
-import java.util.Arrays;
+import expr.Expr;
+import expr.Parser;
+import expr.SyntaxException;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,17 +13,15 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-	private Double calcNum1 = null;
-	private Double calcNum2 = null;
 	private String mostrador;
-	private int operacao = 0;
-	private boolean limpar = false;
+	private boolean limpar;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mostrador = "";
+        limpar = true;
     }
 
     @Override
@@ -30,52 +30,10 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
-    private void atualizarMostrador(String texto) {
-    	if(limpar) {
-    		mostrador = texto;
-    	} else {
-    		mostrador += texto;
-    	}
-    	limpar = false;
-    	EditText editText1 = (EditText) findViewById(R.id.editText1);
-    	editText1.setText(mostrador);
-    }
-    
-    private void operacao(int tipo, Double num) {
-    	if(calcNum1 != null) {
-        	switch(operacao) {
-	    		case 1:
-	    			calcNum1 += num;
-	    			break;
-	    		case 2:
-	    			calcNum1 -= num;
-	    			break;
-	    		case 3:
-	    			calcNum1 *= num;
-	    			break;
-	    		case 4:
-	    			if(calcNum2 != 0) {
-	    				calcNum1 /= num;
-	    			} else {
-	    				calcNum1 = 0.0;
-	    			}
-	    			break;
-        	}
-        	limpar = true;
-        	String s = calcNum1.toString();
-        	if(s.endsWith(".0")) {
-        		s = s.substring(0, s.length()-2);
-        	}
-        	atualizarMostrador(s);
-    	} else {
-			calcNum1 = num;
-			operacao = tipo;
-    	}
-    }
     
     public void buttonCalc_click(View view) {
     	Button btn = (Button) findViewById(view.getId());
+    	EditText editText1 = (EditText) findViewById(R.id.editText1);
     	switch(view.getId()) {
     		case R.id.button1:
     		case R.id.button2:
@@ -87,27 +45,48 @@ public class MainActivity extends Activity {
     		case R.id.button8:
     		case R.id.button9:
     		case R.id.button0:
-    			atualizarMostrador((String) btn.getTag());
+    			if(limpar) {
+    				mostrador = "";
+    			}
+    			limpar = false;
+    			mostrador += (String) btn.getText();
         		break;
     		case R.id.buttonPonto:
-    			//atualizarMostrador("1");
+    			if(limpar) {
+    				mostrador = "0";
+    			}
+    			limpar = false;
+    			mostrador += (String) btn.getText();
     			break;
     		case R.id.buttonSoma:
-    			operacao(1, Double.valueOf(mostrador));
-    			limpar = true;
-    			break;
     		case R.id.buttonSubtracao:
-    			operacao(2, Double.valueOf(mostrador));
-    			break;
     		case R.id.buttonMultiplicacao:
-    			operacao(3, Double.valueOf(mostrador));
-    			break;
     		case R.id.buttonDivisao:
-    			operacao(4, Double.valueOf(mostrador));
+    			if(mostrador.charAt(mostrador.length()-1) == '+' ||
+    			mostrador.charAt(mostrador.length()-1) == '-' ||
+    			mostrador.charAt(mostrador.length()-1) == '*' ||
+    			mostrador.charAt(mostrador.length()-1) == '/') {
+    				mostrador = mostrador.substring(0, mostrador.length()-1);
+    			}
+    			mostrador += (String) btn.getText();
+    			limpar = false;
     			break;
     		case R.id.buttonIgual:
-    			operacao(0, null);
+    			try {
+    				Expr expr = Parser.parse(editText1.getText().toString());
+    				String valor = String.valueOf(expr.value());
+    				if(valor != null && valor.substring(valor.length()-2).equals(".0")) {
+    					mostrador = valor.substring(0, valor.length()-2);
+    				} else {
+    					mostrador = valor;
+    				}
+    				limpar = true;
+    			} catch (SyntaxException e) {
+    			    System.err.println(e.explain());
+    			    return;
+    			}
     			break;
     	}
+    	editText1.setText(mostrador);
     }
 }

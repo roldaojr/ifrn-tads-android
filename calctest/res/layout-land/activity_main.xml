@@ -21,12 +21,30 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/buttonLimpar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Limpar" />
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/buttonLimpar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="Limpar" />
+
+        <Button
+            android:id="@+id/buttonIgual"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:onClick="buttonCalc_click"
+            android:tag="="
+            android:text="="
+            android:textSize="24sp" />
+
+    </TableRow>
 
     <TableRow
         android:id="@+id/tableRow1"
@@ -40,8 +58,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="1"
             android:text="1"
             android:textSize="24sp" />
 
@@ -51,8 +68,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="2"
             android:text="2"
             android:textSize="24sp" />
 
@@ -62,9 +78,18 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="3"
             android:text="3"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/buttonSoma"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:onClick="buttonCalc_click"
+            android:tag="+"
+            android:text="+"
             android:textSize="24sp" />
 
         <Button
@@ -73,6 +98,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="/"
             android:text="/"
             android:textSize="24sp" />
 
@@ -90,8 +116,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="4"
             android:text="4"
             android:textSize="24sp" />
 
@@ -101,8 +126,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="5"
             android:text="5"
             android:textSize="24sp" />
 
@@ -112,9 +136,18 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="6"
             android:text="6"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/buttonSubtracao"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:onClick="buttonCalc_click"
+            android:tag="-"
+            android:text="-"
             android:textSize="24sp" />
 
         <Button
@@ -123,6 +156,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
+            android:tag="*"
             android:text="*"
             android:textSize="24sp" />
 
@@ -140,8 +174,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="7"
             android:text="7"
             android:textSize="24sp" />
 
@@ -151,8 +184,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="8"
             android:text="8"
             android:textSize="24sp" />
 
@@ -162,37 +194,8 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="9"
             android:text="9"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/buttonSubtracao"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:onClick="buttonCalc_click"
-            android:text="-"
-            android:textSize="24sp" />
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1" >
-
-        <Button
-            android:id="@+id/buttonPonto"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
-            android:text="."
             android:textSize="24sp" />
 
         <Button
@@ -201,31 +204,18 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
+            android:tag="0"
             android:text="0"
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/buttonIgual"
+            android:id="@+id/buttonPonto"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
-            android:text="="
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/buttonSoma"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:onClick="buttonCalc_click"
-    		android:layout_marginLeft="-3dip"
-    		android:layout_marginRight="-3dip"
-            android:text="+"
+            android:tag="."
+            android:text="."
             android:textSize="24sp" />
 
     </TableRow>
